@@ -1,0 +1,35 @@
+<div  ng-controller="scrubbedMeasureController">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Measures</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <div class="gridStyle" ng-grid="ngOptions" ng-click="showSelection()"></div>
+                </div>
+            </div>
+        </div>
+            <div class="col-md-6 b-r">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Data Edit</h5>
+                        <div ibox-tools></div>
+                    </div>
+                <form role="form">
+                    <p></p>
+                    <div class="form-group"><label>Measure</label> <input readonly
+                                                                        class="form-control" ng-model="selectedMeasure"></div>
+                    <div class="form-group"><label>Value</label> <input
+                                                                           class="form-control" ng-model="selectedValue"></div>
+                    <div>
+                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
+                                type="submit" ng-click="updateRecord()"><strong>Save</strong></button>
+
+                    </div>
+                </form>
+                </div>
+            </div>
+    </div>
+</div>
