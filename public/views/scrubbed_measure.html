@@ -17,18 +17,24 @@
                         <h5>Data Edit</h5>
                         <div ibox-tools></div>
                     </div>
-                <form role="form">
-                    <p></p>
-                    <div class="form-group"><label>Measure</label> <input readonly
-                                                                        class="form-control" ng-model="selectedMeasure"></div>
-                    <div class="form-group"><label>Value</label> <input
-                                                                           class="form-control" ng-model="selectedValue"></div>
-                    <div>
-                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs"
-                                type="submit" ng-click="updateRecord()"><strong>Save</strong></button>
+                    <div class="ibox-content">
+                        <form role="form">
 
+                            <div class="form-group"><label>Measure</label>
+                                <input readonly class="form-control" ng-model="selectedMeasure">
+                            </div>
+                            <div class="form-group"><label>Value</label>
+                                <input class="form-control" ng-model="selectedValue">
+                                <p></p>
+                                <button class="btn btn-sm btn-primary  m-t-n-xs"
+                                        type="submit" ng-click="updateRecord()"><strong>Save</strong></button>
+                            </div>
+
+
+
+
+                        </form>
                     </div>
-                </form>
                 </div>
             </div>
     </div>
