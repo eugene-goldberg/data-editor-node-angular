@@ -59,6 +59,17 @@ app.controller('scrubbedMeasureController', ['$scope', '$odataresource', 'toaste
             return x.MeasureName == $scope.selectedMeasure;
         });
         $scope.ngData[index].Value = $scope.selectedValue;
+
+        var measure = $odataresource("http://windows-10:8888/ChangeMeasure/", {}, {}, { odatakey: 'ID' });
+
+        measure.odata().filter("ID", $scope.ngData[index].ID).query(function (result) {
+            console.log("Everything went ok!");
+            console.log($scope.selectedValue);
+            result[0].Value = $scope.selectedValue;
+            result[0].$update();
+        }, function () {
+            console.log("Oops, something wrong happened!");
+        });
     };
 }]);
 
