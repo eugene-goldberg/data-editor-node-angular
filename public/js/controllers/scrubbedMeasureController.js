@@ -2,6 +2,11 @@ var app = angular.module('inspinia');
 app.controller('scrubbedMeasureController',['$scope', '$odataresource','toaster',
     function($scope, $odataresource, toaster){
 
+        function popAlert(){
+            toaster.pop('success', "Changes Saved", "Your edits have been saved");
+            console.log('popping alert');
+        }
+
         $scope.ngData = [];
 
         function getData(){
@@ -18,23 +23,9 @@ app.controller('scrubbedMeasureController',['$scope', '$odataresource','toaster'
 
         getData();
 
-        //$scope.ngData = [
-        //    {Measure: "Changes Performed", Value: 50, ID: 1},
-        //    {Measure: "Changes Successful", Value: 43, ID: 1},
-        //    {Measure: "# Emergency Changes", Value: 27, ID: 1},
-        //    {Measure: "% Emergency Changes", Value: 29, ID: 1},
-        //    {Measure: "# of Process defect in failed changes", Value: 22, ID: 1},
-        //    {Measure: "# of urgent/expedited/aler changes", Value: 43, ID: 1},
-        //    {Measure: "% of urgent/expedited/aler changes", Value: 12, ID: 1},
-        //    {Measure: "# of unclosed changes", Value: 54, ID: 1},
-        //    {Measure: "% of unclosed changes", Value: 33, ID: 1},
-        //    {Measure: "% of failed changes", Value: 41, ID: 1},
-        //    {Measure: "# Changes lead to major incidents", Value: 48, ID: 1},
-        //    {Measure: "# Problems opened", Value: 19, ID: 1}
-        //];
-
         $scope.selectedMeasure = "";
         $scope.selectedValue = "";
+        $scope.justification = "";
 
         $scope.mySelections = [];
 
@@ -71,7 +62,9 @@ app.controller('scrubbedMeasureController',['$scope', '$odataresource','toaster'
                     console.log("Everything went ok!");
                     console.log($scope.selectedValue);
                     result[0].Value = $scope.selectedValue;
+                    result[0].Justification = $scope.justification;
                     result[0].$update();
+                    popAlert();
                 },function(){
                     console.log("Oops, something wrong happened!")
                 });
