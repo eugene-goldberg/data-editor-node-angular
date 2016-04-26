@@ -8,26 +8,46 @@ app.controller('scrubbedMeasureController', ['$scope', '$odataresource', 'toaste
         console.log('popping alert');
     }
 
-    $scope.ngData = [];
+    $scope.accountList = {
+        repeatSelect: null,
+        availableOptions: []
+    };
 
-    function getData() {
-        $odataresource("http://windows-10:8888/ChangeMeasure").odata().query(function (data) {
-            $scope.ngData = data;
+    $scope.selectedAccountID = "";
+
+    $scope.showSelectedItem = function (item) {
+        $scope.selectedAccountID = item;
+        console.log(item);
+    };
+
+    function getAccounts() {
+        $odataresource("http://windows-10:8888/Account").odata().query(function (data) {
+            $scope.accountList.availableOptions = data;
+            $scope.selectedAccountID = $scope.accountList.repeatSelect;
         }, function (err) {
             console.log('There was an error: ', err);
         });
     }
 
-    getData();
+    $scope.ngData = [];
+
+    $scope.getMeasuresForSelectedAccount = function () {
+        console.log($scope.selectedAccountID);
+        $odataresource("http://windows-10:8888/ChangeMeasure").odata().filter('AccountID', $scope.selectedAccountID).query(function (data) {
+            $scope.ngData = data;
+        }, function (err) {
+            console.log('There was an error: ', err);
+        });
+    };
+
+    getAccounts();
 
     $scope.selectedMeasure = "";
     $scope.selectedValue = "";
     $scope.justification = "";
-
     $scope.mySelections = [];
 
     $scope.showSelection = function () {
-        //console.log($scope.mySelections[0]);
         $scope.selectedMeasure = $scope.mySelections[0].MeasureName;
         $scope.selectedValue = $scope.mySelections[0].Value;
     };

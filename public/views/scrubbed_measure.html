@@ -1,5 +1,19 @@
 <div  ng-controller="scrubbedMeasureController">
     <div class="row">
+            <div class="col-md-8">
+                <form name="myForm">
+                    <label for="repeatSelect"> Select Account: </label>
+                    <select name="repeatSelect" id="repeatSelect" ng-model="accountList.repeatSelect" ng-change="showSelectedItem(accountList.repeatSelect)">
+                        <option ng-repeat="option in accountList.availableOptions" value="{{option.AccountID}}">{{option.AccountName}}</option>
+                    </select>
+                </form>
+            </div>
+        <div class="col-md4">
+            <button style="margin-left: 15px"  class="btn btn-primary"
+                    ng-click="getMeasuresForSelectedAccount()">Get measures for selected Account</button>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
